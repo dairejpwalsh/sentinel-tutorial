@@ -18,6 +18,12 @@ then
 	tmux new-window -n sentinel -t redis
 	tmux split-window -v -t sentinel
 	tmux split-window -v -t sentinel
+	# copy failover script to /tmp
+	tmux send-keys -t redis:2.1  'cp failover.sh /tmp/' C-m
+	# Mark executable
+	tmux send-keys -t redis:2.1  'chmod +x /tmp/failover.sh' C-m
+	sleep 2
+	# Fire up sentinels
 	tmux send-keys -t redis:2.1  'redis-server sentinel-1.conf --sentinel' C-m
 	tmux send-keys -t redis:2.2  'redis-server sentinel-2.conf --sentinel' C-m
 	tmux send-keys -t redis:2.3  'redis-server sentinel-3.conf --sentinel' C-m
@@ -27,6 +33,7 @@ then
 	tmux send-keys -t redis:3.1 'redis-cli -p 26379' C-m
 	tmux send-keys -t redis:3.2  'redis-cli -p 6501 slaveof 127.0.0.1 6500' C-m
 	tmux send-keys -t redis:3.2  'redis-cli -p 6502 slaveof 127.0.0.1 6500' C-m
+	tmux send-keys -t redis:3.2  'touch /tmp/failovers.log && tail -f /tmp/failovers.log' C-m
 	tmux select-pane -t redis:3.1
 fi
 tmux attach -t redis

@@ -25,6 +25,8 @@ then
 	tmux new-window -n console -t redis
 	tmux split-window -v -t console
 	tmux send-keys -t redis:3.1 'redis-cli -p 26379' C-m
+	tmux send-keys -t redis:3.2  'redis-cli -p 6501 slaveof 127.0.0.1 6500' C-m
+	tmux send-keys -t redis:3.2  'redis-cli -p 6502 slaveof 127.0.0.1 6500' C-m
 	tmux select-pane -t redis:3.1
 fi
 tmux attach -t redis

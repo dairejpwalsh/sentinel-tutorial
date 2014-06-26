@@ -6,7 +6,7 @@ Sample code/scripts for the sentinel tutorial on redis.com
 
 # Failover Script
 The tutorial gives a very simple script to be called on failvoer actions. THis
-script simply logs events to /tmp/failovers.log. TO use it, edit the sentinel
+script simply logs events to /tmp/failovers.log. To use it, edit the sentinel
 config files to have the full path to it and fire up the sentinels.
 
 

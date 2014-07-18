@@ -21,3 +21,5 @@ If you have Tmux installed, running the tmux-redis.sh script in this directory w
 
 3. Open a third window, named 'console', split it and open a redis-cli
    connection to the first sentinel, a console in the second pane.
+
+Note: The scripts assume a base-index of 1 in tmux.conf. If you use the default base 0 index of Tmux you'll want to decrement the window number in the scripts (ie. 1.2 -> 0.2).
